@@ -1,0 +1,27 @@
+{
+  "source": {
+    "type": "elasticsearch",
+    "params": {
+      "host": "localhost:9200",
+      "index": "kibana_sample_data_logs",
+      "query": {
+        "match": {
+          "message": "GET"
+        }
+      }
+    }
+  },
+  "dest":{
+    "type": "filesystem",
+    "params": {
+      "directory": "C:/Users/yourname/path/anonymize-it/Output"
+    }
+  },
+  "include": {
+    "clientip": "ipv4",
+    "ip" : "ipv4",
+    "@timestamp": null
+  },
+  "exclude": [],
+  "include_rest": false
+}
