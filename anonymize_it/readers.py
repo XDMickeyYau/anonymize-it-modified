@@ -2,7 +2,7 @@ from abc import ABCMeta, abstractmethod
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search, A
 import getpass
-from . import utils
+import utils
 import logging
 
 
@@ -100,15 +100,21 @@ class ESReader(BaseReader):
             cont = True
             term = ""
             size = 10000
+            fristsearch=True
             if provider:
                 while cont:
                     response = self.es.search(index=self.index_pattern,
-                                              body=utils.composite_query(field, size, self.query, term))
+                                              body=utils.composite_query(field, size, self.query, term,firstquery=fristsearch))
+                    logging.info("{}".format(utils.composite_query(field, size, self.query),firstquery=fristsearch))
                     for hit in response['aggregations']['my_buckets']['buckets']:
                         mappings[field][hit['key'][field]] = None
+                    logging.info("{}".format(len(response['aggregations']["my_buckets"]['buckets'])))
                     if len(response['aggregations']["my_buckets"]['buckets']) < size:
                         cont = False
-                    term = response['aggregations']["my_buckets"]['buckets'][-1]['key'][field]
+                    #last item exist only of len>0
+                    if len(response['aggregations']["my_buckets"]['buckets']) > 0:
+                        term = response['aggregations']["my_buckets"]['buckets'][-1]['key'][field]
+                    fristsearch = False
 
         logging.info("mappings completed...")
         return mappings

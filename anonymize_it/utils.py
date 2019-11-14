@@ -81,21 +81,36 @@ def faker_examples():
     return providers, examples
 
 
-def composite_query(field, size, query=None, term=""):
-    body= {
-        "size": 0,
-        "aggs": {
-            "my_buckets": {
-                "composite": {
-                    "size": size,
-                    "sources" : [
-                        {field: {"terms": {"field": field}}}
-                    ],
-                    "after": {field: term}
+def composite_query(field, size, query=None, term="", firstquery=False):
+    if firstquery==False:
+        body= {
+            "size": 0,
+            "aggs": {
+                "my_buckets": {
+                    "composite": {
+                        "size": size,
+                        "sources" : [
+                            {field: {"terms": {"field": field}}}
+                        ],
+                        "after": {field: term}
+                    }
                 }
             }
         }
-    }
+    else:
+        body= {
+            "size": 0,
+            "aggs": {
+                "my_buckets": {
+                    "composite": {
+                        "size": size,
+                        "sources" : [
+                            {field: {"terms": {"field": field}}}
+                        ]
+                    }
+                }
+            }
+        }
     if query:
         body['query'] = query
     return json.dumps(body)

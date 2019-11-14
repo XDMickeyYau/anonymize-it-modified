@@ -2,7 +2,7 @@ from abc import abstractmethod, ABCMeta
 import json
 import uuid
 import os
-
+import logging
 from google.cloud import storage
 
 
@@ -32,7 +32,12 @@ class FSWriter(BaseWriter):
         dir_path = os.path.join(os.path.abspath(os.getcwd()), self.out_dir)
         os.makedirs(dir_path, exist_ok=True)
         with open("{}/{}.json".format(dir_path, file_name), 'w') as f:
-            f.write(data)
+            logging.info("type {}".format(type(data[0])))
+            f.write('[')
+            f.write(','.join(data))
+            f.write(']')
+            #for i in data:
+                #f.write(i)
 
 
 class GCSWriter(BaseWriter):
