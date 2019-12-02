@@ -1,0 +1,41 @@
+{
+  "_index": "kibana_sample_data_logs",
+  "_type": "_doc",
+  "_id": "nhSiaG4BbJXEIu6EbEwY",
+  "_score": 1,
+  "_source": {
+    "agent": "Mozilla/5.0 (X11; Linux x86_64; rv:6.0a1) Gecko/20110421 Firefox/6.0a1",
+    "bytes": 6219,
+    "clientip": "223.87.60.27",
+    "extension": "deb",
+    "geo": {
+      "srcdest": "IN:US",
+      "src": "IN",
+      "dest": "US",
+      "coordinates": {
+        "lat": 39.41042861,
+        "lon": -88.8454325
+      }
+    },
+    "host": "artifacts.elastic.co",
+    "index": "kibana_sample_data_logs",
+    "ip": "223.87.60.27",
+    "machine": {
+      "ram": 8589934592,
+      "os": "win 8"
+    },
+    "memory": null,
+    "message": "223.87.60.27 - - [2018-07-22T00:39:02.912Z] \"GET /elasticsearch/elasticsearch-6.3.2.deb_1 HTTP/1.1\" 200 6219 \"-\" \"Mozilla/5.0 (X11; Linux x86_64; rv:6.0a1) Gecko/20110421 Firefox/6.0a1\"",
+    "phpmemory": null,
+    "referer": "http://twitter.com/success/wendy-lawrence",
+    "request": "/elasticsearch/elasticsearch-6.3.2.deb",
+    "response": 200,
+    "tags": [
+      "success",
+      "info"
+    ],
+    "timestamp": "2019-11-03T00:39:02.912Z",
+    "url": "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.3.2.deb_1",
+    "utc_time": "2019-11-03T00:39:02.912Z"
+  }
+}
